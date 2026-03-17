@@ -1,0 +1,31 @@
+{
+  "name": "b3lance-load",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "load-tester": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "dev": "tsx watch src/cli/index.ts",
+    "start": "node dist/cli/index.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src test --ext .ts",
+    "lint:fix": "eslint src test --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+    "lint-staged": {
+      "*.ts": [
+        "eslint --fix",
+        "prettier --write"
+      ]
+    }
+}
