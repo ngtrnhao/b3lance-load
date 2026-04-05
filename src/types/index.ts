@@ -7,38 +7,44 @@
  */
 import { z } from 'zod';
 
-export const LoadTestConfig = z.object({
+export const LoadTestConfigSchema = z.object({
   url: z.string().url(),
-  method: z.enum(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS', 'CONNECT']),
+  method: z.enum(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS']).default('GET'),
   headers: z.record(z.string(), z.string()).optional(),
   body: z.string().optional(),
-  timeout: z.number().optional(),
-  concurrency: z.number().optional(),
-  requests: z.number().optional(),
-  duration: z.number().optional(),
-  rampUp: z.number().optional(),
+  timeout: z.number().positive().default(30000),
+  concurrency: z.number().positive().default(30000),
+  requests: z.number().positive().optional(),
+  duration: z.number().positive().optional(),
+  rampUp: z.number().nonnegative().optional(),
   output: z.string().optional(),
 });
 
-export const RequestResult = z.object({
-  latency: z.number(),
-  statusCode: z.number(),
-  error: z.string().optional(),
-  bytesReceived: z.number(),
-  timestamp: z.number(),
-});
+export type LoadTestConfig = z.infer<typeof LoadTestConfigSchema>;
+export interface RequestResult {
+  latency: number;
+  statusCode: number;
+  error?: string;
+  errorType?: 'timeout' | 'connection_refused' | 'conn_reset' | 'unknown';
+  bytesReceived: number;
+  timestamp: number;
+}
 
-export const MetricsSummary = z.object({
-  p50: z.number(),
-  p75: z.number(),
-  p90: z.number(),
-  p99: z.number(),
-  max: z.number(),
-  totalRequests: z.number(),
-  successCount: z.number(),
-  rps: z.number(),
-  errorRate: z.number(),
-  duration: z.number(),
-  statusCode: z.record(z.number(), z.number()),
-  error: z.string().optional(),
-});
+export interface MetricsSummary {
+  p50: number;
+  p75: number;
+  p90: number;
+  p99: number;
+  max: number;
+  min: number;
+  mean: number;
+  totalRequests: number;
+  successCount: number;
+  errorCount: number;
+  rps: number;
+  errorRate: number;
+  duration: number;
+  statusCodeDistribution: Record<number, number>;
+  errorBreakdown: Record<string, number>;
+  totalBytesReceived: number;
+}
