@@ -13,7 +13,7 @@ export const LoadTestConfigSchema = z.object({
   headers: z.record(z.string(), z.string()).optional(),
   body: z.string().optional(),
   timeout: z.number().positive().default(30000),
-  concurrency: z.number().positive().default(30000),
+  concurrency: z.number().positive().default(10),
   requests: z.number().positive().optional(),
   duration: z.number().positive().optional(),
   rampUp: z.number().nonnegative().optional(),

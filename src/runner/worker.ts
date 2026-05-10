@@ -25,7 +25,7 @@ function classifyError(error: unknown): RequestResult['errorType'] {
 }
 
 export async function executeRequest(config: LoadTestConfig): Promise<RequestResult> {
-  const startTime = Date.now();
+  const startTime = performance.now();
   const timestamp = Date.now();
 
   try {

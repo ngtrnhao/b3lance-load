@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "generatedAt": "2026-05-10T07:11:05.113Z",
+    "config": {
+      "url": "https://www.ngtrnhao.io.vn/",
+      "method": "GET",
+      "timeout": 30000,
+      "concurrency": 20,
+      "requests": 100,
+      "rampUp": 0,
+      "output": "results-100.json"
+    }
+  },
+  "summary": {
+    "p50": 93,
+    "p75": 288,
+    "p90": 308,
+    "p95": 318,
+    "p99": 330,
+    "max": 331,
+    "min": 89,
+    "mean": 159.54,
+    "totalRequests": 100,
+    "successCount": 0,
+    "errorCount": 100,
+    "rps": 114.39833702981241,
+    "errorRate": 100,
+    "duration": 874.1385810000002,
+    "statusCodeDistribution": {
+      "403": 100
+    },
+    "errorBreakdown": {},
+    "totalBytesReceived": 6400
+  }
+}
