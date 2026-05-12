@@ -20,7 +20,7 @@ Supports 10,000+ concurrent connections, accurate p99 via HDR Histogram, ramp-up
 ## Installation
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/ngtrnhao/b3lance-load
 cd b3lance-load
 npm install
 npm run build
